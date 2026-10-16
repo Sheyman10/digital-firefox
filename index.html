@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>digital Firefox</title>
+    <meta
+      name="description"
+      content="digital Firefox – moderne digitale Lösungen mit klarer Marken- und Web-Strategie."
+    />
+    <style>
+      :root {
+        --bg: #fffaf0;
+        --panel: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --primary: #f59e0b;
+        --primary-dark: #d97706;
+        --primary-soft: #fef3c7;
+        --secondary: #111827;
+        --line: rgba(15, 23, 42, 0.08);
+        --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      }
+
+      * { box-sizing: border-box; }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .container {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      header {
+        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 48%, #f97316 100%);
+        color: #111827;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        box-shadow: 0 8px 20px rgba(245, 158, 11, 0.18);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        min-height: 78px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        letter-spacing: 0.3px;
+        font-size: 1.35rem;
+      }
+
+      .brand-mark {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, #fff2c1 0%, #fbbf24 18%, #f59e0b 45%, #d97706 100%);
+        box-shadow: inset 0 0 10px rgba(255,255,255,0.5), 0 12px 24px rgba(217, 119, 6, 0.25);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        font-weight: 600;
+        flex-wrap: wrap;
+      }
+
+      .nav-links a {
+        opacity: 0.92;
+      }
+
+      .nav-links a:hover {
+        opacity: 1;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0 22px;
+        border-radius: 12px;
+        border: 1px solid transparent;
+        font-weight: 700;
+        transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn-primary {
+        background: var(--secondary);
+        color: #fef3c7;
+        box-shadow: 0 10px 25px rgba(17, 24, 39, 0.12);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.8);
+        color: var(--text);
+        border-color: rgba(15, 23, 42, 0.08);
+      }
+
+      .hero {
+        padding: 72px 0 42px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 36px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(245, 158, 11, 0.14);
+        color: #92400e;
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        font-size: clamp(2.6rem, 5vw, 4.2rem);
+        line-height: 1.06;
+        margin: 18px 0 16px;
+        letter-spacing: -0.05em;
+      }
+
+      .hero-copy p {
+        font-size: 1.08rem;
+        color: var(--muted);
+        max-width: 620px;
+        margin: 0 0 22px;
+      }
+
+      .hero-actions {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+
+      .stats {
+        display: flex;
+        gap: 28px;
+        flex-wrap: wrap;
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .stats strong {
+        display: block;
+        color: var(--text);
+        font-size: 1.35rem;
+      }
+
+      .hero-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        box-shadow: var(--shadow);
+        padding: 24px;
+      }
+
+      .dashboard {
+        background: linear-gradient(180deg, #fffdf7 0%, #fffaf0 100%);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 18px;
+      }
+
+      .mini-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 18px;
+      }
+
+      .dot-row {
+        display: flex;
+        gap: 8px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #fbbf24;
+      }
+
+      .dot:nth-child(2) { background: #fcd34d; }
+      .dot:nth-child(3) { background: #f59e0b; }
+
+      .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .kpi {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 16px;
+      }
+
+      .kpi span {
+        display: block;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
+
+      .kpi strong {
+        font-size: clamp(1.2rem, 2.5vw, 2rem);
+      }
+
+      .kpi small {
+        display: block;
+        margin-top: 6px;
+        color: #16a34a;
+        font-weight: 700;
+      }
+
+      section {
+        padding: 56px 0;
+      }
+
+      .section-head {
+        max-width: 720px;
+        margin-bottom: 30px;
+      }
+
+      .section-head h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        line-height: 1.1;
+        margin: 8px 0 12px;
+        letter-spacing: -0.04em;
+      }
+
+      .section-head p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .feature-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 22px;
+        box-shadow: 0 12px 25px rgba(15, 23, 42, 0.03);
+      }
+
+      .icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--primary-soft), #fde68a);
+        font-size: 1.5rem;
+        margin-bottom: 18px;
+      }
+
+      .feature-card h3 {
+        margin: 0 0 8px;
+        font-size: 1.35rem;
+      }
+
+      .feature-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .process {
+        background: #fffdf8;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .step {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 22px;
+      }
+
+      .step-number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--primary-soft);
+        color: #92400e;
+        font-weight: 800;
+        margin-bottom: 14px;
+      }
+
+      .step h3 {
+        margin: 0 0 8px;
+      }
+
+      .step p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .cta-panel {
+        background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+        color: white;
+        border-radius: 24px;
+        padding: 30px;
+        box-shadow: var(--shadow);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .cta-panel h3 {
+        margin: 0 0 8px;
+        font-size: clamp(1.5rem, 3vw, 2.3rem);
+      }
+
+      .cta-panel p {
+        margin: 0;
+        color: rgba(255,255,255,0.84);
+      }
+
+      footer {
+        background: #0b1020;
+        color: #fef3c7;
+        padding: 28px 0;
+      }
+
+      .footer-wrap {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 900px) {
+        .hero-grid,
+        .features-grid,
+        .steps {
+          grid-template-columns: 1fr;
+        }
+
+        .cta-panel {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      @media (max-width: 620px) {
+        .nav {
+          flex-direction: column;
+          justify-content: center;
+          padding: 16px 0;
+        }
+
+        .nav-links {
+          justify-content: center;
+        }
+
+        .hero {
+          padding-top: 42px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <a href="#top" class="brand" aria-label="digital Firefox Startseite">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>digital Firefox</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Hauptnavigation">
+          <a href="#leistungen">Leistungen</a>
+          <a href="#prozess">Prozess</a>
+          <a href="#about">Über uns</a>
+          <a href="#kontakt">Kontakt</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">Digitales Branding</span>
+            <h1>Deine Marke, die auffällt.</h1>
+            <p>
+              digital Firefox entwickelt moderne Webseiten, digitale Markenstrategien und
+              überzeugende User Experiences – klar, schnell und wirkungsvoll.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#kontakt">Projekt starten</a>
+              <a class="btn btn-secondary" href="#leistungen">Mehr erfahren</a>
+            </div>
+
+            <div class="stats" aria-label="Erfolgszahlen">
+              <div>
+                <strong>120+</strong>
+                Projekte
+              </div>
+              <div>
+                <strong>4.9/5</strong>
+                Bewertung
+              </div>
+              <div>
+                <strong>24/7</strong>
+                Support
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-card" aria-label="Projektstatus">
+            <div class="dashboard">
+              <div class="mini-header">
+                <strong>Projektstatus</strong>
+                <div class="dot-row" aria-hidden="true">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+
+              <div class="kpi-grid">
+                <div class="kpi">
+                  <span>Traffic</span>
+                  <strong>+64%</strong>
+                  <small>seit 3 Monaten</small>
+                </div>
+                <div class="kpi">
+                  <span>Leads</span>
+                  <strong>+41%</strong>
+                  <small>mehr Anfragen</small>
+                </div>
+                <div class="kpi">
+                  <span>UX</span>
+                  <strong>9.3</strong>
+                  <small>Top-Performance</small>
+                </div>
+                <div class="kpi">
+                  <span>Verkehr</span>
+                  <strong>3.2x</strong>
+                  <small>mehr Konversion</small>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="leistungen">
+        <div class="container">
+          <div class="section-head">
+            <span class="eyebrow">Leistungen</span>
+            <h2>Alles, was eine starke digitale Präsenz braucht.</h2>
+            <p>
+              Von der ersten Idee bis zur fertigen Umsetzung – wir schaffen digitale Lösungen,
+              die nicht nur gut aussehen, sondern auch Ergebnisse liefern.
+            </p>
+          </div>
+
+          <div class="features-grid">
+            <article class="feature-card">
+              <div class="icon" aria-hidden="true">✦</div>
+              <h3>Branding</h3>
+              <p>
+                Visuelle Markenentwicklung, Positionierung und klare Designsysteme für mehr
+                Wiedererkennung und Vertrauen.
+              </p>
+            </article>
+
+            <article class="feature-card">
+              <div class="icon" aria-hidden="true">▣</div>
+              <h3>Webdesign</h3>
+              <p>
+                Moderne Landingpages und Unternehmenswebsites, die auf jedem Gerät optimal
+                funktionieren und überzeugen.
+              </p>
+            </article>
+
+            <article class="feature-card">
+              <div class="icon" aria-hidden="true">⚡</div>
+              <h3>Performance</h3>
+              <p>
+                Performance-optimierte Erfahrungen mit schneller Ladezeit, besseren UX-Parametern
+                und messbarem Wachstum.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="prozess" class="process">
+        <div class="container">
+          <div class="section-head">
+            <span class="eyebrow">Prozess</span>
+            <h2>So arbeiten wir.</h2>
+          </div>
+
+          <div class="steps">
+            <article class="step">
+              <div class="step-number">1</div>
+              <h3>Analyse</h3>
+              <p>Wir verstehen Ziele, Zielgruppe und Markt, damit die Strategie wirklich passt.</p>
+            </article>
+
+            <article class="step">
+              <div class="step-number">2</div>
+              <h3>Konzept</h3>
+              <p>Wir entwickeln klare Inhalte, visuelle Richtlinien und eine starke Markenstory.</p>
+            </article>
+
+            <article class="step">
+              <div class="step-number">3</div>
+              <h3>Umsetzung</h3>
+              <p>Mit UX, Design und Technik entstehen überzeugende digitale Erlebnisse.</p>
+            </article>
+
+            <article class="step">
+              <div class="step-number">4</div>
+              <h3>Optimierung</h3>
+              <p>Wir messen, verbessern und skalieren — damit der Erfolg nachhaltig wächst.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="container">
+          <div class="section-head">
+            <span class="eyebrow">Über uns</span>
+            <h2>Wir verbinden Stil mit Substanz.</h2>
+            <p>
+              digital Firefox arbeitet mit Unternehmen, Startups und Marken zusammen, die ihre
+              digitale Präsenz klarer, stärker und erfolgreicher gestalten wollen.
+            </p>
+          </div>
+
+          <div class="cta-panel">
+            <div>
+              <h3>Bereit für ein stärkeres digitales Auftreten?</h3>
+              <p>Wir helfen dir dabei, deine Marke verständlich, attraktiv und wirkungsvoll zu machen.</p>
+            </div>
+            <a class="btn btn-primary" href="#kontakt">Jetzt anfragen</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="kontakt">
+      <div class="container footer-wrap">
+        <div>
+          <strong>digital Firefox</strong><br />
+          hello@digitalfirefox.de
+        </div>
+        <div class="footer-links">
+          <a href="#leistungen">Leistungen</a>
+          <a href="#prozess">Prozess</a>
+          <a href="#about">Über uns</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
